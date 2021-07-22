@@ -1,4 +1,4 @@
-package com.mahmoudshaaban.flowing.ui
+package com.mahmoudshaaban.flowing.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,7 +24,7 @@ class PhotosViewModel
     private var lastQuery = "popular"
 
     // if the same data are retrieved return the same flow else return the dif data
-    fun searchRepo(): Flow<PagingData<PhotoModel>> {
+    fun getPhotos(): Flow<PagingData<PhotoModel>> {
         val lastResult = currentSearchResult
         if ( lastResult != null) {
             return lastResult
