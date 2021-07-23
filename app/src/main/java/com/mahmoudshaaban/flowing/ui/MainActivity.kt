@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         setupNavigationGraph()
 
     }
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     fun setupNavigationGraph(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_hosting_fragments) as NavHostFragment
         navController = navHostFragment.navController
-        setupActionBarWithNavController(navController)
 
     }
     override fun onSupportNavigateUp(): Boolean {

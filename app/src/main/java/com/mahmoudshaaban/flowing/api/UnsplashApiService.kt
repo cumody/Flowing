@@ -15,7 +15,7 @@ interface UnsplashApiService {
 
     companion object {
         const val BASE_API_URL = "https://api.unsplash.com/"
-        const val API_KEY = "wxl8gDYQvKHvTcfTzfFJ2Fy0GoSuKoJovMopdieYBvk"
+        const val API_KEY = "gxWmyL1AMu5yCAWSGhFTkjAwxJG6bEhas4XPLmZYGBc"
     }
 
     @Headers("Accept-Version: v1", "Authorization: Client-ID $API_KEY")
