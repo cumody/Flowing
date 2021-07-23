@@ -23,4 +23,15 @@ constructor(private val service: UnsplashApiService) {
             ).flow
         }
 
+    fun getSearchResultStream(query: String): Flow<PagingData<PhotoModel>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = Constants.NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { UnsplashSearchDataSource(service, query) }
+        ).flow
     }
+
+
+}

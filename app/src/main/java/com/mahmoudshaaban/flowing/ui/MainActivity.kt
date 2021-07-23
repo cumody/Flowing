@@ -2,50 +2,39 @@ package com.mahmoudshaaban.flowing.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.paging.LoadState
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.mahmoudshaaban.flowing.R
-import com.mahmoudshaaban.flowing.adapters.PhotosAdapter
 import com.mahmoudshaaban.flowing.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val adapter = PhotosAdapter()
-    private val viewModel: PhotosViewModel by viewModels()
+    lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        initAdapter()
-        observeObservers()
+        setupNavigationGraph()
 
     }
 
-    private fun initAdapter() {
-        binding.recyclerPopularPhotos.adapter = adapter
+    fun setupNavigationGraph(){
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_hosting_fragments) as NavHostFragment
+        navController = navHostFragment.navController
+
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun observeObservers() {
-       lifecycleScope.launch {
-            viewModel.searchRepo().collect {
-                adapter.submitData(it)
-            }
-        }
-    }
+
 
 }
